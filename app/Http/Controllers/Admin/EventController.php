@@ -178,25 +178,23 @@ class EventController extends Controller
         $request->validate([
             'event_name' => 'required|string|max:255',
             'event_date' => 'required|date',
+            'guest_names' => 'nullable|string',
+            'speaker_name' => 'nullable|string',
             'location' => 'required|string|max:255',
-            'event_type' => 'required|string|max:255',
-            'image' => 'required|file|image|mimes:jpeg,png,jpg,gif|max:2048',
+            'event_type' => 'required|integer',
+            'description' => 'nullable|string',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
         // Handle image upload
         if ($request->hasFile('image')) {
-            // Ensure directory exists
-            Storage::disk('public')->makeDirectory('event_images');
+            // Store the image
+            $imagePath = $request->file('image')->store('event_images', 'public');
 
-            // Handle file upload
-            $file = $request->file('image');
-            $originalName = $file->getClientOriginalName();
-            $shortenedName = substr(pathinfo($originalName, PATHINFO_FILENAME), 0, 12) . '.' . $file->getClientOriginalExtension();
+            // Get the file name
+            $imageName = basename($imagePath);
 
-            // Save the file with a shortened name
-            $storedPath = $file->storeAs('event_images', $shortenedName, 'public');
-
-
+            // Store the image file name in the database
             UserEvent::create([
                 'user_id' => Auth::id(),
                 'event_name' => $request->event_name,
@@ -204,11 +202,11 @@ class EventController extends Controller
                 'guest_names' => $request->guest_names,
                 'speaker_name' => $request->speaker_name,
                 'location' => $request->location,
-                'type' => 2,
+                'type' => 1,
                 'status' => 1,
                 'event_type' => $request->event_type,
                 'description' => $request->description,
-                'image_path' => $shortenedName,  // Store the image name in the database
+                'image_path' => $imageName,  // Store the image name in the database
             ]);
             return redirect()->route('admin.eventcreate')->with('success', 'Event created successfully.');
         }
@@ -220,10 +218,7 @@ class EventController extends Controller
     {
         $view = "AdminPanel.PublishRequestView";
         $list = UserEvent::all();
-        foreach ($list as $event) {
-            $userName = User::find($event->user_id)->name ?? 'Unknown User';
-        }
-        return view('AdminView', compact('view', 'list', 'userName'));
+        return view('AdminView', compact('view', 'list'));
     }
 
     public function publishEventDelete($id)

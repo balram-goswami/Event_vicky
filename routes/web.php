@@ -57,8 +57,9 @@ Route::namespace('App\Http\Controllers\Admin')->prefix('admin')->group(function 
 
         Route::get('/showcreateevent', [EventController::class, 'showcreateevent'])->name('admin.showcreateevent');
         Route::get('/upload_event_video', [EventController::class, 'upload_event_video'])->name('admin.upload_event_video');
-        Route::post('/create_event', [EventController::class, 'create_event'])->name('create_event');
+        Route::post('/create_event', [EventController::class, 'create_event'])->name('admin.create_event');
         Route::get('/allstudents', [AllStudentController::class, 'index'])->name('allstudents');
+        Route::post('activeUser/{id}', [AllStudentController::class, 'update'])->name('admin.activeUser');
         Route::post('/uploadVideo', [EventController::class, 'uploadVideo'])->name('uploadVideo');
 
         // Controller function for Event Type Actions

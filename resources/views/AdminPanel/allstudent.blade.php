@@ -71,8 +71,24 @@
                             @else
                             <td>Active</td>
                             @endif
-                            <td>{{ $user->created_at->format('d-m-Y') }}</td>
-
+                            @if ($user->status == 1)
+                            <td>
+                            <form action="{{ route('admin.activeUser', $user->id) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    <input name="status" value="2" hidden>
+                                    <button type="submit" class="btn btn-success">Active Now</button>
+                                </form>
+                            </td>
+                            @else
+                            <td>
+                            <form action="{{ route('admin.activeUser', $user->id) }}" method="POST" style="display:inline;">
+                                    @csrf
+                                    <input name="status" value="1" hidden>
+                                    <button type="submit" class="btn btn-success">Inactive</button>
+                                </form>
+                            </td>
+                            @endif
+                            
                         </tr>
                         @endforeach
                     </tbody>

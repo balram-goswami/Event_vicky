@@ -4,7 +4,7 @@
             <div class="container">
                 <h2 class="mb-4"><strong>Create</strong> Event</h2>
                 <!-- Update the form action to point to your route, method to POST, and add enctype for file uploads -->
-                <form action="{{ route('create_event') }}" method="POST" enctype="multipart/form-data">
+                <form action="{{ route('admin.create_event') }}" method="POST" enctype="multipart/form-data">
                     @csrf
                     <!-- Image Upload -->
                     <div class="row mb-3">

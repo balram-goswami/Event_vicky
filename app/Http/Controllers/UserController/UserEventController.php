@@ -39,8 +39,6 @@ class UserEventController extends Controller
             'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048'
         ]);
 
-        // dd($request->all());
-
         // Handle image upload
         if ($request->hasFile('image')) {
             // Store the image
