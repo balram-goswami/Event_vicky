@@ -14,7 +14,9 @@
         }
     </style>
     <h3 style="color: red;">Hello {{ $currentUser->name }} </h3>
+    @if($adminEvents && $adminEvents->isNotEmpty())
     <h3>Events By Admin</h3>
+    @endif
     <div class="row g-1">
         @foreach($adminEvents as $data)
         <div class="col-lg-6">
@@ -47,7 +49,9 @@
         @endforeach
     </div>
     <br>
-    <h3>Event I Created</h3>
+    @if($userEvents && $userEvents->isNotEmpty())
+    <h3>My Events</h3>
+    @endif
     <div class="row g-1">
         @foreach($userEvents as $data)
         <div class="col-lg-6">
@@ -58,13 +62,9 @@
                             <div class="col-md-6 custom-card">
                                 <h4 class="fontsize">{{ $data->event_name }}</h4>
                                 <p class="description fontsize">{{ $data->description }}</p>
-                                <h4 class="fontsize">Event By:- {{ $data->user->name }}</h4>
-                                <h4 class="fontsize">Event Type:- {{ $data->eventType->name }}</h4>
                                 <a href="{{ route('referredregister',  $data->user_id ) }}" id="copyLinkBtn" target="_blank">
                                     <button class="btn join-btn" onclick="copyLink(event)">Share Event</button>
                                 </a>
-
-                                <!-- Invisible text area to copy the link -->
                                 <input type="text" value="{{ route('referredregister', $data->user_id ) }}" id="linkToCopy" style="position: absolute; left: -9999px;">
                             </div>
                             <div class="col-md-6">

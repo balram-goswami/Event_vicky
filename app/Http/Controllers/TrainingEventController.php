@@ -16,12 +16,30 @@ class TrainingEventController extends Controller
             ->where('event_id', $id)
             ->where('status', 2)
             ->first();
-        $userDetails = User::where('id',$PaymentHistory->user_id)->get()->first();
+        $userDetails = User::where('id', $PaymentHistory->user_id)->get()->first();
 
         if (!$PaymentHistory) {
             return redirect()->back()->with('msg', 'Please buy the event.');
         }
+        $ids = $id;
 
-        return view('TraningView', compact('EventTraning', 'view', 'userDetails'));
+        return view('TraningView', compact('EventTraning', 'view', 'userDetails', 'id'));
+    }
+
+    public function markComplete(Request $request, $id)
+    {
+        $request->validate([
+            'event_status' => 'required|integer',
+        ]);
+
+        $event = PaymentHistory::where('id', $id)
+            ->where('user_id', auth()->id())
+            ->firstOrFail(); 
+
+        $event->update([
+            'event_status' => $request->event_status, 
+        ]);
+
+        return redirect()->back()->with('success', 'Event updated successfully.');
     }
 }

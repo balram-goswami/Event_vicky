@@ -202,8 +202,8 @@ class EventController extends Controller
                 'guest_names' => $request->guest_names,
                 'speaker_name' => $request->speaker_name,
                 'location' => $request->location,
-                'type' => 1,
-                'status' => 1,
+                'type' => 2,
+                'status' => 2,
                 'event_type' => $request->event_type,
                 'description' => $request->description,
                 'image_path' => $imageName,  // Store the image name in the database
@@ -217,7 +217,7 @@ class EventController extends Controller
     public function publishRequestView()
     {
         $view = "AdminPanel.PublishRequestView";
-        $list = UserEvent::all();
+        $list = UserEvent::where('type', 1)->get();
         return view('AdminView', compact('view', 'list'));
     }
 

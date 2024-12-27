@@ -14,8 +14,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // Set the auto-increment value to start from 15
-        DB::statement('ALTER TABLE users AUTO_INCREMENT = 15;');
         
         // Create a user with ID 15 (the next available ID after setting auto-increment)
         User::factory()->create([
@@ -23,5 +21,7 @@ class DatabaseSeeder extends Seeder
             'email' => 'test@example.com',
             'password' => Hash::make('test@123'),
         ]);
+
+        User::factory(10)->create();
     }
 }

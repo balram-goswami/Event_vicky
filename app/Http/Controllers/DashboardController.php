@@ -20,8 +20,9 @@ class DashboardController extends Controller
         $adminEvents = UserEvent::where('type', 2)->where('status', 2)->get();
         $userEvents = UserEvent::where('user_id', auth()->id())
         ->where('type', 1)
+        ->where('status', 2)
         ->get();
 
         return view('UserView', compact('view', 'adminEvents', 'userEvents', 'currentUser'));
-    }
+    } 
 }

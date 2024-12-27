@@ -17,14 +17,12 @@ class UserEventController extends Controller
     public function index()
     {
         $view = "UserPanel.userevents.event";
-        $eventIds = DB::table('payment_history')
-            ->whereIn('event_id', function ($query) {
-                $query->select('id')
-                    ->from('event_types');
-            })
-            ->pluck('user_id');
-
-        $EventType = EventType::where('id', $eventIds)->get();
+        $EventType = EventType::whereIn('id', function ($query) {
+            $query->select('event_id')
+                ->from('payment_history')
+                ->where('user_id', auth()->id())
+                ->where('event_status', 2);
+        })->get();
 
         return view('UserView', compact('EventType', 'view'));
     }
@@ -78,10 +76,10 @@ class UserEventController extends Controller
         return view('UserView', compact('view', 'Event', 'PaymentHistory'));
     }
 
-    public function referredUsers() 
+    public function referredUsers()
     {
         $view = "UserPanel.ReferredUsers";
-        $users = User::where('referral_id' , auth()->id())->get();
+        $users = User::where('referral_id', auth()->id())->get();
         return view('UserView', compact('view', 'users'));
     }
 

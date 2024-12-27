@@ -18,6 +18,7 @@ class PaymentHistory extends Model
         'type',
         'amount',
         'transaction_id',
+        'event_status',
         'status',
         'payment_date',
     ];

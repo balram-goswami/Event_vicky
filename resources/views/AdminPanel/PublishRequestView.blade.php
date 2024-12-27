@@ -86,7 +86,7 @@
                         @foreach($list as $data)
                         <tr>
                             <td>{{ $data->id }}</td>
-                            <td>{{ $userName }}</td>
+                            <td></td>
                             <td>{{ $data->event_name }}</td>
                             @if($data->status === 1)
                             <td style="color: #007BFF;">Pending</td>
