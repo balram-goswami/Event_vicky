@@ -1,0 +1,27 @@
+# Node.js
+node_modules/
+
+# PHP
+vendor/
+composer.lock
+
+# Laravel
+/public/storage
+/storage/*.key
+.env
+.env.*
+
+# VS Code
+.vscode/
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# Log files
+*.log
+
+# IDE files
+.idea/

@@ -25,6 +25,7 @@ Route::middleware(['auth'])->group(
     function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
         Route::get('/eventtraning/{id}', [TrainingEventController::class, 'index'])->name('eventtraning');
+        Route::post('/markComplete/{id}', [TrainingEventController::class, 'markComplete'])->name('mark.complete');
         Route::get('/userevent', [UserEventController::class, 'index'])->name('userevent');
         Route::post('/userevent/create', [UserEventController::class, 'create_event'])->name('userevent.store');
         Route::get('/referredUsers', [UserEventController::class, 'referredUsers'])->name('referredUsers');

@@ -16,6 +16,14 @@
                 </div>
                 <!-- Hidden Canvas for Certificate -->
                 <canvas id="certificateCanvas" style="display: none;"></canvas>
+
+                <div class="mt-4 ">
+                    <form action="{{ route('mark.complete', $id) }}" method="POST">
+                        @csrf
+                        <input type="text" name="event_status" value="2" hidden>
+                        <button type="submit" class="btn btn-primary">Mark Complete</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>

@@ -66,7 +66,7 @@
             </style>
             <div class="col-lg-4 col-md-6 mb-4">
                 <div class="card h-100">
-                    @if($createEvent)
+                    @if($createEvent && $createEvent->isNotEmpty())
                     <div class="create-event-card text-center">
                         <a href="{{route('userevent')}}">
                             <div>
