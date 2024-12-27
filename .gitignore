@@ -1,0 +1,9 @@
+# Node.js dependencies
+node_modules/
+
+# Laravel-specific
+vendor/
+.env
+/storage/*.key
+/storage/logs/*
+/bootstrap/cache/*
