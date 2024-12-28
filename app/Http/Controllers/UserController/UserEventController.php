@@ -9,7 +9,8 @@ use App\Models\{
     EventType,
     UserEvent,
     PaymentHistory,
-    User
+    User,
+    EventLead
 };
 
 class UserEventController extends Controller
@@ -25,6 +26,14 @@ class UserEventController extends Controller
         })->get();
 
         return view('UserView', compact('EventType', 'view'));
+    }
+
+    public function viewUserEvent($id)
+    {
+        $view = "UserPanel.userevents.ViewEventDetails";
+        $eventDetail = UserEvent::where('id', $id)->get()->first();
+        $leads = EventLead::where('event_id', $eventDetail->id)->get();
+        return view('UserView', compact('eventDetail', 'view', 'leads'));
     }
 
     public function create_event(Request $request)

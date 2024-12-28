@@ -30,7 +30,8 @@ Route::middleware(['auth'])->group(
         Route::post('/userevent/create', [UserEventController::class, 'create_event'])->name('userevent.store');
         Route::get('/referredUsers', [UserEventController::class, 'referredUsers'])->name('referredUsers');
         Route::get('/users/download', [UserEventController::class, 'downloadUsers'])->name('users.download');
-
+        
+        Route::get('/viewUserEvent/{id}', [UserEventController::class, 'viewUserEvent'])->name('viewUserEvent');
 
         Route::get('/courespaymentpage/{id}', [UserEventController::class, 'courespaymentpage'])->name('courespaymentpage');
         Route::get('/my_event', [UserEventController::class, 'my_event'])->name('my_event');
@@ -40,9 +41,11 @@ Route::middleware(['auth'])->group(
         Route::post('update/{id}', [UserEventController::class, 'update'])->name('update');
 
         Route::resource('PaymentHistory', PaymentHistoryController::class);
-        
     }
 );
+
+Route::get('/shareEvent/{id}', [DashboardController::class, 'shareEvent'])->name('shareEvent');
+Route::post('/eventleads', [DashboardController::class, 'eventLeads'])->name('eventleads');
 
 Route::namespace('App\Http\Controllers\Admin')->prefix('admin')->group(function () {
     Route::get('/login', [AdminController::class, 'index']);

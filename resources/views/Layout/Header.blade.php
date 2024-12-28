@@ -40,12 +40,6 @@
           </a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-dark" href="{{route('referredUsers')}}">
-            <i class="material-symbols-rounded opacity-5">Event</i>
-            <span class="nav-link-text ms-1">Referred Users</span>
-          </a>
-        </li>
-        <li class="nav-item">
           <form method="POST" action="{{ route('user.logout') }}" id="logout-form" style="display: none;">
             @csrf
           </form>
