@@ -20,16 +20,21 @@ class DashboardController extends Controller
         $view = "UserPanel.dashboard";
         $currentUser = getUser(auth()->id());
         $adminEvents = UserEvent::where('type', 2)->where('status', 2)->get();
+        $otherEvents = UserEvent::where('type', 1)
+            ->where('status', 2)
+            ->where('user_id', '!=', auth()->id())
+            ->get();
         $userEvents = UserEvent::where('user_id', auth()->id())
             ->where('type', 1)
             ->where('status', 2)
             ->get();
+          
         $PaymentHistory = PaymentHistory::where('user_id', auth()->id())
-            ->where('status', 2)
             ->get();
 
-        return view('UserView', compact('view', 'adminEvents', 'userEvents', 'currentUser', 'PaymentHistory'));
+        return view('UserView', compact('view', 'adminEvents', 'userEvents', 'currentUser', 'PaymentHistory', 'otherEvents'));
     }
+
     public function shareEvent($id)
     {
         $eventDetail = UserEvent::where('id', $id)->get()->first();
