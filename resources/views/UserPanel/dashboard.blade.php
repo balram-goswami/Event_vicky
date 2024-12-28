@@ -27,8 +27,8 @@
                             <div class="col-md-6 custom-card">
                                 <h4 class="fontsize">{{ $data->event_name }}</h4>
                                 <p class="description fontsize">{{ $data->description }}</p>
-                                <h4 class="fontsize">Event By:- {{ $data->user->name }}</h4>
-                                <h4 class="fontsize">Event Type:- {{ $data->eventType->name }}</h4>
+                                {{-- <h4 class="fontsize">Event By:- {{ $data->user->name }}</h4>
+                                <h4 class="fontsize">Event Type:- {{ $data->eventType->name }}</h4>--}}
                                 <a href="{{ route('courespaymentpage', $data->id) }}">
                                     <button class="btn join-btn">Join Event</button>
                                 </a>
