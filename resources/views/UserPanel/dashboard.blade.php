@@ -32,15 +32,7 @@
                                 <a href="{{ route('courespaymentpage', $data->id) }}">
                                     <button class="btn join-btn">View Event</button>
                                 </a>
-                                @elseif($paymentHistoryForEvent === NULL)
-                                <a href="{{ route('courespaymentpage', $data->id) }}">
-                                    <button class="btn join-btn">View Event</button>
-                                </a>
-                                @else
-                                <div class="card-footer text-center">
-                                    <h3 class="btn btn-primary">We are processing your payment<br> Status Update Shortly</h3>
-                                </div>
-                                @endif
+                               
 
                             </div>
                             <div class="col-md-6">
