@@ -24,6 +24,7 @@ Route::post('/logout', [RegisterController::class, 'logout'])->name('user.logout
 Route::middleware(['auth'])->group(
     function () {
         Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+        Route::get('allevents', [DashboardController::class, 'allevents'])->name('allevents');
         Route::get('/eventtraning/{id}', [TrainingEventController::class, 'index'])->name('eventtraning');
         Route::post('/markComplete/{id}', [TrainingEventController::class, 'markComplete'])->name('mark.complete');
         Route::get('/userevent', [UserEventController::class, 'index'])->name('userevent');

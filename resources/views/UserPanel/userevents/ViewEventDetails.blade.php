@@ -88,13 +88,14 @@
                 <div class="card h-100">
                     <div class="card-body text-center">
                         <h5 class="card-title">Leads</h5>
-                        <table>
+                        <table id="leadsTable">
                             <thead>
                                 <tr>
                                     <th>#</th>
                                     <th>Name</th>
                                     <th>Email</th>
                                     <th>Number</th>
+                                    <th>Description</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -103,18 +104,49 @@
                                     <td>{{ $loop->iteration }}</td>
                                     <td>{{ $lead->name }}</td>
                                     <td>{{ $lead->email }}</td>
-                                    <td>{{ $lead->phone }}</td> <!-- Assuming 'phone' is the column name -->
+                                    <td>{{ $lead->phone }}</td>
+                                    <td>{{ $lead->description }}</td> <!-- Assuming 'phone' is the column name -->
                                 </tr>
                                 @endforeach
                             </tbody>
                         </table>
-
+                        <button id="downloadBtn" class="btn btn-primary mt-3">Download</button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+<script>
+    document.getElementById('downloadBtn').addEventListener('click', function() {
+        const table = document.getElementById('leadsTable');
+        let csv = [];
+        const rows = table.querySelectorAll('tr');
+
+        rows.forEach(row => {
+            const cols = row.querySelectorAll('th, td');
+            let rowData = [];
+            cols.forEach(col => rowData.push(col.textContent.trim()));
+            csv.push(rowData.join(','));
+        });
+
+        const csvString = csv.join('\n');
+        const blob = new Blob([csvString], {
+            type: 'text/csv'
+        });
+        const url = URL.createObjectURL(blob);
+
+        const a = document.createElement('a');
+        a.href = url;
+        a.download = 'leads.csv';
+        a.style.display = 'none';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+    });
+</script>
+
 
 <script>
     document.getElementById('shareEventButton').addEventListener('click', function() {

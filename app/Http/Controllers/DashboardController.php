@@ -19,6 +19,14 @@ class DashboardController extends Controller
     {
         $view = "UserPanel.dashboard";
         $currentUser = getUser(auth()->id());
+
+        return view('UserView', compact('view', 'currentUser'));
+    }
+
+    public function allevents()
+    {
+        $view = "UserPanel/userevents/AllEvents";
+        $currentUser = getUser(auth()->id());
         $adminEvents = UserEvent::where('type', 2)->where('status', 2)->get();
         $otherEvents = UserEvent::where('type', 1)
             ->where('status', 2)
@@ -32,7 +40,7 @@ class DashboardController extends Controller
         $PaymentHistory = PaymentHistory::where('user_id', auth()->id())
             ->get();
 
-        return view('UserView', compact('view', 'adminEvents', 'userEvents', 'currentUser', 'PaymentHistory', 'otherEvents'));
+            return view('UserView', compact('view', 'adminEvents', 'userEvents', 'currentUser', 'PaymentHistory', 'otherEvents'));
     }
 
     public function shareEvent($id)

@@ -13,61 +13,25 @@
             font-size: 12px;
         }
     </style>
-    <h3 style="color: red;">Hello {{ $currentUser->name }} </h3>
-    @if($adminEvents && $adminEvents->isNotEmpty())
-    <h3>Events By Admin</h3>
-    @endif
-    <div class="row g-1">
-        @foreach($adminEvents as $data)
-        <div class="col-lg-6">
-            <div class="card" style="min-height: 223px;">
+<h3 style="color: red;">Hello {{ $currentUser->name }} </h3>
+    <div class="row g-1"> <!-- g-4 will add spacing between columns -->
+        <div class="col-lg-8">
+            <div class="card">
                 <div class="card-body">
                     <div class="container">
                         <div class="row align-items-center">
                             <div class="col-md-6 custom-card">
-                                <?php
-                                $username = DB::table('users')
-                                    ->where('id', $data->user_id)
-                                    ->value('name');
-                                $eventname = DB::table('event_types')
-                                    ->where('id', $data->event_type)
-                                    ->value('name');
-                                ?>
-                                <h4 class="fontsize">{{ $data->event_name }}</h4>
-                                <p class="description fontsize">{{ $data->description }}</p>
-                                <h4 class="fontsize">Event By:- {{ $username }}</h4>
-                                <h4 class="fontsize">Event Type:- {{ $eventname }}</h4>
-
-                                @php
-
-                                $paymentHistoryForEvent = null;
-
-                                // Ensure $PaymentHistory is not null before querying further
-                                if ($PaymentHistory && $PaymentHistory->isNotEmpty()) {
-                                $paymentHistoryForEvent = $PaymentHistory->where('event_id', $data->id)->first();
-                                }
-                                @endphp
-                                @if($paymentHistoryForEvent && $paymentHistoryForEvent->status == 2)
-                                <a href="{{ route('courespaymentpage', $data->id) }}">
-                                    <button class="btn join-btn">View Event</button>
+                                <h4 class="fontsize">Gateway To Host Event For Crypque</h4>
+                                <p class="description fontsize">
+                                    This program helps you create events for your community after completing certification successfully.
+                                </p>
+                                <a href="{{ route('allevents') }}">
+                                    <button class="btn join-btn">Join Program</button>
                                 </a>
-                                @elseif($paymentHistoryForEvent === NULL)
-                                <a href="{{ route('courespaymentpage', $data->id) }}">
-                                    <button class="btn join-btn">View Event</button>
-                                </a>
-                                @else
-                                <div class="card-footer text-center">
-                                    <h3 class="btn btn-primary">We are processing your payment<br> Status Update Shortly</h3>
-                                </div>
-                                @endif
-
                             </div>
-                            <div class="col-md-6">
+                            <div class="col-md-6 dashboardbox">
                                 <div class="program-card">
-                                    <img src="{{ asset('storage/event_images/' . $data->image_path) }}"
-                                        class="card-img-top"
-                                        alt="Event Image"
-                                        style="padding: 12px; border-radius: 18px;">
+                                    <h5>CRYPQUE EVENT CERTIFICATION PROGRAM 2024</h5>
                                 </div>
                             </div>
                         </div>
@@ -75,106 +39,5 @@
                 </div>
             </div>
         </div>
-        @endforeach
     </div>
-    <br>
-    @if($otherEvents && $otherEvents->isNotEmpty())
-    <h3>Other Users Events</h3>
-    @endif
-    <div class="row g-1">
-        @foreach($otherEvents as $data)
-        <div class="col-lg-6">
-            <div class="card" style="min-height: 223px;">
-                <div class="card-body">
-                    <div class="container">
-                        <div class="row align-items-center">
-                            <div class="col-md-6 custom-card">
-                                <?php
-                                $username = DB::table('users')
-                                    ->where('id', $data->user_id)
-                                    ->value('name');
-                                $eventname = DB::table('event_types')
-                                    ->where('id', $data->event_type)
-                                    ->value('name');
-                                ?>
-
-                                <h4 class="fontsize">{{ $data->event_name }}</h4>
-                                <p class="description fontsize">{{ $data->description }}</p>
-                                <h4 class="fontsize">Event By:- {{ $username }}</h4>
-                                <h4 class="fontsize">Event Type:- {{ $eventname }}</h4>
-
-                                @php
-
-                                $paymentHistoryForEvent = null;
-
-                                // Ensure $PaymentHistory is not null before querying further
-                                if ($PaymentHistory && $PaymentHistory->isNotEmpty()) {
-                                $paymentHistoryForEvent = $PaymentHistory->where('event_id', $data->id)->first();
-                                }
-                                @endphp
-                                @if($paymentHistoryForEvent && $paymentHistoryForEvent->status == 2)
-                                <a href="{{ route('courespaymentpage', $data->id) }}">
-                                    <button class="btn join-btn">View Event</button>
-                                </a>
-                                @elseif($paymentHistoryForEvent === NULL)
-                                <a href="{{ route('courespaymentpage', $data->id) }}">
-                                    <button class="btn join-btn">View Event</button>
-                                </a>
-                                @else
-                                <div class="card-footer text-center">
-                                    <h3 class="btn btn-primary">We are processing your payment<br> Status Update Shortly</h3>
-                                </div>
-                                @endif
-
-                            </div>
-                            <div class="col-md-6">
-                                <div class="program-card">
-                                    <img src="{{ asset('storage/event_images/' . $data->image_path) }}"
-                                        class="card-img-top"
-                                        alt="Event Image"
-                                        style="padding: 12px; border-radius: 18px;">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        @endforeach
-    </div>
-    <br>
-    @if($userEvents && $userEvents->isNotEmpty())
-    <h3>My Events</h3>
-    @endif
-    <div class="row g-1">
-        @foreach($userEvents as $data)
-        <div class="col-lg-6">
-            <div class="card" style="min-height: 223px;">
-                <div class="card-body">
-                    <div class="container">
-                        <div class="row align-items-center">
-                            <i class="fa fa-share"></i>
-                            <div class="col-md-6 custom-card">
-                                <h4 class="fontsize">{{ $data->event_name }}</h4>
-                                <p class="description fontsize">{{ $data->description }}</p>
-                                <a href="{{ route('viewUserEvent',  $data->id ) }}">
-                                    <button class="btn join-btn">View Event</button>
-                                </a>
-                            </div>
-                            <div class="col-md-6">
-                                <div class="program-card">
-                                    <img src="{{ asset('storage/event_images/' . $data->image_path) }}"
-                                        class="card-img-top"
-                                        alt="Event Image"
-                                        style="padding: 12px; border-radius: 18px;">
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-        @endforeach
-    </div>
-
 </div>
