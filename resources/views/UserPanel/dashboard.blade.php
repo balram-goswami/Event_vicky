@@ -25,10 +25,18 @@
                     <div class="container">
                         <div class="row align-items-center">
                             <div class="col-md-6 custom-card">
+                                <?php
+                                $username = DB::table('users')
+                                    ->where('id', $data->user_id)
+                                    ->value('name');
+                                $eventname = DB::table('event_types')
+                                    ->where('id', $data->event_type)
+                                    ->value('name');
+                                ?>
                                 <h4 class="fontsize">{{ $data->event_name }}</h4>
                                 <p class="description fontsize">{{ $data->description }}</p>
-                                <h4 class="fontsize">Event By:- {{ $data->user->name }}</h4>
-                                <h4 class="fontsize">Event Type:- {{ $data->eventType->name }}</h4>
+                                <h4 class="fontsize">Event By:- {{ $username }}</h4>
+                                <h4 class="fontsize">Event Type:- {{ $eventname }}</h4>
 
                                 @php
 
