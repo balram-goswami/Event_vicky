@@ -9,11 +9,11 @@
                         class="card-img-top"
                         alt="Event Image"
                         style="padding: 12px; border-radius: 18px;">
-                    <div class="card-body text-center">
+                    <div class="card-body">
                         <h5 class="card-title">
                             {{ $data->event_name }} <br>
-                            Guest :-{{ $data->guest_names }}<br>
-                            PROGRAM :- {{ $data->event_date }}<br>
+                            Guest :- {{ $data->guest_names }}<br>
+                            Date :- {{ $data->event_date }}<br>
                             Speaker :- {{ $data->speaker_name }}<br>
                         </h5>
                         <p class="card-text">{{ $data->description }}</p>

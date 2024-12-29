@@ -8,12 +8,13 @@
                         class="card-img-top"
                         alt="Event Image"
                         style="padding: 12px; border-radius: 18px;">
-                    <div class="card-body text-center">
+                    <div class="card-body ">
                         <h5 class="card-title">
-                            {{ $event->event_name }} <span class="text-highlight">{{ $event->guest_names }}</span>
-                            PROGRAM {{ $event->event_date }}<br>
-                            Speaker {{ $event->speaker_name }}<br>
-                            Event Type {{ $event->event_type }}
+                            {{ $event->event_name }} <br>
+                            <span class="text-highlight">Guest :- {{ $event->guest_names }}</span><br>
+                            Date :- {{ $event->event_date }}<br>
+                            Speaker :- {{ $event->speaker_name }}<br>
+                            Event Type :- {{ $event->event_type }}
                         </h5>
                         <p class="card-text">{{ $event->description }}</p>
                     </div>

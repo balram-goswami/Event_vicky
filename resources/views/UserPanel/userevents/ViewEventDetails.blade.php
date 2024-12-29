@@ -69,7 +69,7 @@
                         <h5 class="card-title col-lg-6">
                             {{ $eventDetail->event_name }} <br>
                             Guest :- {{ $eventDetail->guest_names }}<br>
-                            PROGRAM :- {{ $eventDetail->event_date }}<br>
+                            Date :- {{ $eventDetail->event_date }}<br>
                             Speaker :- {{ $eventDetail->speaker_name }}<br>
                         </h5>
                         <p class="card-text">{{ $eventDetail->description }}</p>
