@@ -84,9 +84,13 @@
                     </thead>
                     <tbody>
                         @foreach($list as $data)
-                        <tr>
+                        <tr><?php
+                                $username = DB::table('users')
+                                    ->where('id', $data->user_id)
+                                    ->value('name');
+                                ?>
                             <td>{{ $data->id }}</td>
-                            <td></td>
+                            <td>{{ $username }}</td>
                             <td>{{ $data->event_name }}</td>
                             @if($data->status === 1)
                             <td style="color: #007BFF;">Pending</td>
