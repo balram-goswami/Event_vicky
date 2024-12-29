@@ -27,19 +27,8 @@
                             <div class="col-md-6 custom-card">
                                 <h4 class="fontsize">{{ $data->event_name }}</h4>
                                 <p class="description fontsize">{{ $data->description }}</p>
-                                <h4 class="fontsize">Event By:- {{ $data->user->name }}</h4>
-                                <h4 class="fontsize">Event Type:- {{ $data->eventType->name }}</h4>
-
-                                @php
-
-                                $paymentHistoryForEvent = null;
-
-                                // Ensure $PaymentHistory is not null before querying further
-                                if ($PaymentHistory && $PaymentHistory->isNotEmpty()) {
-                                $paymentHistoryForEvent = $PaymentHistory->where('event_id', $data->id)->first();
-                                }
-                                @endphp
-                                @if($paymentHistoryForEvent && $paymentHistoryForEvent->status == 2)
+                                {{-- <h4 class="fontsize">Event By:- {{ $data->user->name }}</h4>
+                                <h4 class="fontsize">Event Type:- {{ $data->eventType->name }}</h4>--}}
                                 <a href="{{ route('courespaymentpage', $data->id) }}">
                                     <button class="btn join-btn">View Event</button>
                                 </a>
